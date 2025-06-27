@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
-/* Apply Montserrat font globally */
+/* Apply Inter font globally */
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Accent color classes - easy to change site-wide */
+.accent {
+  color: #f97316; /* orange-500 */
+}
+
+.accent-bold {
+  color: #f97316; /* orange-500 */
+  font-weight: 600;
 }

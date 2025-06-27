@@ -87,6 +87,18 @@ export const themes = {
   })
 };
 
+// Accent color system - easy to change throughout app
+export const accentColors = {
+  blue: 'blue-600',
+  purple: 'purple-600', 
+  emerald: 'emerald-600',
+  rose: 'rose-600',
+  orange: 'orange-500'
+};
+
+// Current accent color (change this to update accent throughout app)
+export const currentAccent = accentColors.orange;
+
 // Active theme - change this to switch entire app theme
 export const activeTheme = themes.glassmorphism;
 

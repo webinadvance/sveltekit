@@ -9,6 +9,7 @@ npm run build
 
 # Deploy to production directory
 echo "📂 Copying files to production..."
+sudo rm -rf /var/www/cinziabrugnola-app/*
 sudo cp -r * /var/www/cinziabrugnola-app/
 sudo chown -R www-data:www-data /var/www/cinziabrugnola-app
 
