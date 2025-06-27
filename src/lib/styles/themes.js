@@ -38,20 +38,20 @@ export const createTheme = (config) => ({
 
 // Theme presets
 export const themes = {
-  // Enhanced crystal glassmorphism theme - WOW effect
+  // Professional clean theme
   glassmorphism: createTheme({
-    primary: 'purple',
-    secondary: 'pink',
+    primary: 'slate',
+    secondary: 'gray',
     accent: 'blue',
-    glassBackground: 'bg-white/8 backdrop-gradient-to-br backdrop-from-white/25 backdrop-to-white/5',
-    glassBlur: 'backdrop-blur-2xl backdrop-saturate-150',
-    glassBorder: 'border border-white/40 ring-1 ring-white/20',
-    glassShadow: 'shadow-3xl drop-shadow-2xl',
-    textPrimary: 'text-white drop-shadow-lg',
-    textSecondary: 'text-white/90 drop-shadow-md',
-    textMuted: 'text-white/70 drop-shadow-sm',
-    hoverEffect: 'hover:scale-110 hover:-translate-y-2 hover:rotate-1 hover:shadow-4xl',
-    transition: 'transition-all duration-500 ease-out'
+    glassBackground: 'bg-white/95',
+    glassBlur: 'backdrop-blur-sm',
+    glassBorder: 'border border-gray-200',
+    glassShadow: 'shadow-lg',
+    textPrimary: 'text-gray-900',
+    textSecondary: 'text-gray-700',
+    textMuted: 'text-gray-500',
+    hoverEffect: 'hover:shadow-xl',
+    transition: 'transition-all duration-200'
   }),
   
   // Dark solid theme alternative
@@ -98,11 +98,11 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
     button: {
       base: `inline-flex items-center justify-center gap-2 rounded-xl font-medium ${theme.effects.transition} ${theme.effects.focus} transform active:scale-95 ${theme.effects.hover}`,
       variants: {
-        primary: `${theme.glass.background} ${theme.glass.blur} ${theme.text.primary} ${theme.glass.border} ${theme.glass.shadow} shadow-white/10`,
-        secondary: `bg-${theme.colors.secondary}-500/15 ${theme.glass.blur} ${theme.text.secondary} border border-${theme.colors.secondary}-300/40 shadow-lg shadow-${theme.colors.secondary}-500/20`,
-        outline: `bg-white/3 ${theme.glass.blur} ${theme.text.primary} ${theme.glass.border} shadow-inner`,
-        ghost: `bg-white/2 ${theme.glass.blur} ${theme.text.primary} border-transparent hover:bg-white/8`,
-        destructive: `bg-${theme.colors.error}-500/15 ${theme.glass.blur} text-${theme.colors.error}-100 border border-${theme.colors.error}-300/40 shadow-lg shadow-${theme.colors.error}-500/20`
+        primary: `bg-gray-900 text-white ${theme.glass.border} ${theme.glass.shadow} hover:bg-gray-800`,
+        secondary: `bg-gray-100 ${theme.text.secondary} border border-gray-300 hover:bg-gray-200`,
+        outline: `bg-transparent ${theme.text.primary} border border-gray-300 hover:bg-gray-50`,
+        ghost: `bg-transparent ${theme.text.primary} border-transparent hover:bg-gray-100`,
+        destructive: `bg-red-600 text-white border border-red-600 hover:bg-red-700`
       },
       sizes: {
         sm: 'px-4 py-2 text-sm',
@@ -115,11 +115,11 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
     card: {
       base: `rounded-2xl ${theme.effects.transition} overflow-hidden relative`,
       variants: {
-        default: `${theme.glass.background} ${theme.glass.blur} ${theme.glass.border} ${theme.glass.shadow} shadow-white/5`,
-        elevated: `bg-white/6 ${theme.glass.blur} border border-white/50 ring-2 ring-white/20 shadow-3xl shadow-black/30`,
-        outlined: `bg-white/4 ${theme.glass.blur} border border-white/60 ring-1 ring-white/30 shadow-inner`,
-        ghost: `bg-white/2 ${theme.glass.blur} border-transparent hover:bg-white/6 hover:border-white/20`,
-        frosted: `bg-white/3 backdrop-blur-3xl backdrop-saturate-200 border border-white/50 ring-2 ring-white/15 shadow-4xl shadow-black/20`
+        default: `${theme.glass.background} ${theme.glass.border} ${theme.glass.shadow}`,
+        elevated: `bg-white border border-gray-200 shadow-xl`,
+        outlined: `bg-transparent border border-gray-300`,
+        ghost: `bg-transparent border-transparent`,
+        frosted: `bg-white/98 border border-gray-200 shadow-lg`
       },
       padding: {
         none: '',
@@ -129,21 +129,21 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
         xl: 'p-10'
       },
       effects: {
-        hover: 'hover:shadow-4xl hover:scale-[1.03] hover:-translate-y-2 hover:ring-2 hover:ring-white/30',
-        float: 'animate-bounce hover:animate-pulse'
+        hover: 'hover:shadow-xl hover:-translate-y-1',
+        float: ''
       }
     },
     
     badge: {
-      base: `inline-flex items-center rounded-full font-medium ${theme.glass.blur}`,
+      base: `inline-flex items-center rounded-full font-medium`,
       variants: {
-        default: `${theme.glass.background} ${theme.text.primary} ${theme.glass.border}`,
-        secondary: `bg-${theme.colors.secondary}-500/20 ${theme.text.secondary} border border-${theme.colors.secondary}-300/30`,
-        success: `bg-${theme.colors.success}-500/20 text-${theme.colors.success}-100 border border-${theme.colors.success}-300/30`,
-        warning: `bg-${theme.colors.warning}-500/20 text-${theme.colors.warning}-100 border border-${theme.colors.warning}-300/30`,
-        error: `bg-${theme.colors.error}-500/20 text-${theme.colors.error}-100 border border-${theme.colors.error}-300/30`,
-        info: `bg-${theme.colors.info}-500/20 text-${theme.colors.info}-100 border border-${theme.colors.info}-300/30`,
-        outline: `bg-white/5 ${theme.text.primary} border border-white/30`
+        default: `bg-gray-100 ${theme.text.primary} border border-gray-200`,
+        secondary: `bg-gray-100 ${theme.text.secondary} border border-gray-200`,
+        success: `bg-green-50 text-green-700 border border-green-200`,
+        warning: `bg-yellow-50 text-yellow-700 border border-yellow-200`,
+        error: `bg-red-50 text-red-700 border border-red-200`,
+        info: `bg-blue-50 text-blue-700 border border-blue-200`,
+        outline: `bg-transparent ${theme.text.primary} border border-gray-300`
       },
       sizes: {
         sm: 'px-2 py-0.5 text-xs',
@@ -169,14 +169,14 @@ export const getAppBackground = () => {
   
   // Different backgrounds based on theme
   if (theme === themes.glassmorphism) {
-    return 'bg-gradient-to-br from-purple-400 via-pink-500 to-red-500';
+    return 'bg-gradient-to-br from-gray-50 to-white';
   } else if (theme === themes.dark) {
     return 'bg-gradient-to-br from-gray-900 to-gray-800';
   } else if (theme === themes.light) {
     return 'bg-gradient-to-br from-gray-50 to-white';
   }
   
-  return 'bg-gradient-to-br from-purple-400 via-pink-500 to-red-500';
+  return 'bg-gradient-to-br from-gray-50 to-white';
 };
 
 // Easy theme switching function
