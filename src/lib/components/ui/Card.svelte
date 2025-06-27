@@ -1,31 +1,22 @@
 <script>
+  import { getComponentStyles } from '$lib/styles/themes.js';
+  
   export let variant = 'default';
   export let padding = 'md';
   export let hover = false;
-  
-  const variants = {
-    default: 'bg-white border-gray-200',
-    elevated: 'bg-white border-gray-200 shadow-lg',
-    outlined: 'bg-transparent border-gray-300',
-    ghost: 'bg-gray-50 border-transparent'
-  };
-  
-  const paddings = {
-    none: '',
-    sm: 'p-4',
-    md: 'p-6',
-    lg: 'p-8'
-  };
+  export let float = false;
   
   $: cardClasses = [
-    'rounded-xl border transition-all duration-200',
-    variants[variant],
-    paddings[padding],
-    hover ? 'hover:shadow-md hover:border-gray-300' : '',
+    getComponentStyles('card', variant, padding),
+    hover ? 'hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1' : '',
+    float ? 'animate-bounce' : '',
     $$props.class || ''
   ].filter(Boolean).join(' ');
 </script>
 
 <div class={cardClasses} {...$$restProps}>
-  <slot />
+  <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl pointer-events-none"></div>
+  <div class="relative z-10">
+    <slot />
+  </div>
 </div>
