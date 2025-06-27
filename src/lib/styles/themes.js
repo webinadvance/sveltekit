@@ -38,20 +38,20 @@ export const createTheme = (config) => ({
 
 // Theme presets
 export const themes = {
-  // Professional clean theme
+  // Professional clean theme - Fully Flat Modern Design
   glassmorphism: createTheme({
     primary: 'slate',
     secondary: 'gray',
     accent: 'blue',
-    glassBackground: 'bg-white/95',
-    glassBlur: 'backdrop-blur-sm',
+    glassBackground: 'bg-white',
+    glassBlur: '',
     glassBorder: 'border border-gray-200',
-    glassShadow: 'shadow-lg',
+    glassShadow: '',
     textPrimary: 'text-gray-900',
     textSecondary: 'text-gray-700',
     textMuted: 'text-gray-500',
-    hoverEffect: 'hover:shadow-xl',
-    transition: 'transition-all duration-200'
+    hoverEffect: 'hover:bg-gray-50',
+    transition: 'transition-colors duration-150'
   }),
   
   // Dark solid theme alternative
@@ -96,13 +96,13 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
   
   const styles = {
     button: {
-      base: `inline-flex items-center justify-center gap-2 rounded-xl font-medium ${theme.effects.transition} ${theme.effects.focus} transform active:scale-95 ${theme.effects.hover}`,
+      base: `inline-flex items-center justify-center gap-2 rounded-lg font-medium ${theme.effects.transition} ${theme.effects.focus}`,
       variants: {
-        primary: `bg-gray-900 text-white ${theme.glass.border} ${theme.glass.shadow} hover:bg-gray-800`,
-        secondary: `bg-gray-100 ${theme.text.secondary} border border-gray-300 hover:bg-gray-200`,
-        outline: `bg-transparent ${theme.text.primary} border border-gray-300 hover:bg-gray-50`,
-        ghost: `bg-transparent ${theme.text.primary} border-transparent hover:bg-gray-100`,
-        destructive: `bg-red-600 text-white border border-red-600 hover:bg-red-700`
+        primary: `bg-gray-900 text-white hover:bg-gray-800`,
+        secondary: `bg-gray-100 ${theme.text.secondary} hover:bg-gray-200`,
+        outline: `bg-transparent ${theme.text.primary} border border-gray-300 hover:border-gray-400`,
+        ghost: `bg-transparent ${theme.text.primary} hover:bg-gray-100`,
+        destructive: `bg-red-600 text-white hover:bg-red-700`
       },
       sizes: {
         sm: 'px-4 py-2 text-sm',
@@ -113,13 +113,13 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
     },
     
     card: {
-      base: `rounded-2xl ${theme.effects.transition} overflow-hidden relative`,
+      base: `rounded-lg ${theme.effects.transition} overflow-hidden relative`,
       variants: {
-        default: `${theme.glass.background} ${theme.glass.border} ${theme.glass.shadow}`,
-        elevated: `bg-white border border-gray-200 shadow-xl`,
+        default: `${theme.glass.background} ${theme.glass.border}`,
+        elevated: `bg-white border border-gray-300`,
         outlined: `bg-transparent border border-gray-300`,
         ghost: `bg-transparent border-transparent`,
-        frosted: `bg-white/98 border border-gray-200 shadow-lg`
+        frosted: `bg-white border border-gray-200`
       },
       padding: {
         none: '',
@@ -129,20 +129,20 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
         xl: 'p-10'
       },
       effects: {
-        hover: 'hover:shadow-xl hover:-translate-y-1',
+        hover: 'hover:border-gray-300',
         float: ''
       }
     },
     
     badge: {
-      base: `inline-flex items-center rounded-full font-medium`,
+      base: `inline-flex items-center rounded font-medium`,
       variants: {
-        default: `bg-gray-100 ${theme.text.primary} border border-gray-200`,
-        secondary: `bg-gray-100 ${theme.text.secondary} border border-gray-200`,
-        success: `bg-green-50 text-green-700 border border-green-200`,
-        warning: `bg-yellow-50 text-yellow-700 border border-yellow-200`,
-        error: `bg-red-50 text-red-700 border border-red-200`,
-        info: `bg-blue-50 text-blue-700 border border-blue-200`,
+        default: `bg-gray-100 ${theme.text.primary}`,
+        secondary: `bg-gray-100 ${theme.text.secondary}`,
+        success: `bg-green-100 text-green-800`,
+        warning: `bg-yellow-100 text-yellow-800`,
+        error: `bg-red-100 text-red-800`,
+        info: `bg-blue-100 text-blue-800`,
         outline: `bg-transparent ${theme.text.primary} border border-gray-300`
       },
       sizes: {
