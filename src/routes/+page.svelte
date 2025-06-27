@@ -8,58 +8,61 @@
 
 <!-- Actress Landing Page - Glassmorphism Theme -->
 <div class="min-h-screen {appBackground} relative overflow-hidden">
-  <!-- Floating background elements -->
-  <div class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-  <div class="absolute bottom-20 right-10 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-400/15 rounded-full blur-3xl animate-pulse delay-500"></div>
+  <!-- Enhanced crystal floating elements -->
+  <div class="absolute top-10 left-5 w-96 h-96 bg-white/15 rounded-full blur-3xl animate-pulse shadow-2xl shadow-white/20"></div>
+  <div class="absolute bottom-10 right-5 w-[30rem] h-[30rem] bg-pink-400/25 rounded-full blur-3xl animate-pulse delay-1000 shadow-2xl shadow-pink-400/30"></div>
+  <div class="absolute top-1/3 left-1/3 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-500 shadow-2xl shadow-purple-400/25"></div>
+  <div class="absolute bottom-1/3 right-1/3 w-64 h-64 bg-blue-400/15 rounded-full blur-2xl animate-pulse delay-700 shadow-xl shadow-blue-400/20"></div>
 
   <!-- Hero Section -->
-  <div class="container mx-auto px-4 py-16 relative z-10">
+  <div class="container mx-auto px-4 py-12 sm:py-16 lg:py-20 relative z-10">
     <div class="text-center max-w-5xl mx-auto">
-      <Badge class="mb-6 animate-bounce">✨ Professional Actress</Badge>
+      <Badge class="mb-4 sm:mb-6 animate-bounce shadow-lg shadow-white/20">✨ Professional Actress</Badge>
       
-      <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-8">
-        <span class="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent drop-shadow-lg">
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 sm:mb-8">
+        <span class="bg-gradient-to-r from-white via-white/95 to-white/70 bg-clip-text text-transparent drop-shadow-2xl filter brightness-110">
           Cinzia
         </span>
         <br>
-        <span class="bg-gradient-to-r from-white/90 to-white/60 bg-clip-text text-transparent text-4xl md:text-6xl">
+        <span class="bg-gradient-to-r from-white/95 via-white/85 to-white/60 bg-clip-text text-transparent text-2xl sm:text-4xl md:text-5xl lg:text-6xl drop-shadow-lg">
           Professional Actress
         </span>
       </h1>
       
-      <p class="{currentTheme.text.secondary} text-xl md:text-2xl mb-10 leading-relaxed backdrop-blur-sm max-w-3xl mx-auto">
+      <p class="{currentTheme.text.secondary} text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-10 leading-relaxed backdrop-blur-sm max-w-3xl mx-auto px-4 sm:px-0 drop-shadow-md">
         Bringing characters to life with passion, dedication, and artistic excellence.
-        <br class="hidden md:block">
+        <br class="hidden sm:block">
         Available for film, television, theater, and commercial projects.
       </p>
       
-      <div class="flex gap-4 justify-center flex-wrap">
-        <Button size="lg" class="animate-pulse">
-          <Star class="w-5 h-5" />
-          View Portfolio
-          <ArrowRight class="w-5 h-5" />
+      <div class="flex gap-3 sm:gap-4 justify-center flex-wrap px-4 sm:px-0">
+        <Button size="lg" class="animate-pulse shadow-xl shadow-white/20 ring-2 ring-white/20">
+          <Star class="w-4 h-4 sm:w-5 sm:h-5" />
+          <span class="hidden sm:inline">View Portfolio</span>
+          <span class="sm:hidden">Portfolio</span>
+          <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5" />
         </Button>
-        <Button size="lg" variant="outline" class="hover:scale-110">
-          <Mail class="w-5 h-5" />
-          Contact Me
+        <Button size="lg" variant="outline" class="hover:scale-110 shadow-lg shadow-white/10">
+          <Mail class="w-4 h-4 sm:w-5 sm:h-5" />
+          <span class="hidden sm:inline">Contact Me</span>
+          <span class="sm:hidden">Contact</span>
         </Button>
       </div>
     </div>
   </div>
 
   <!-- Services Section -->
-  <div class="container mx-auto px-4 py-16 relative z-10">
-    <div class="text-center mb-16">
-      <h2 class="{currentTheme.text.primary} text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+  <div class="container mx-auto px-4 py-12 sm:py-16 lg:py-20 relative z-10">
+    <div class="text-center mb-12 sm:mb-16">
+      <h2 class="{currentTheme.text.primary} text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl">
         Acting Services
       </h2>
-      <p class="{currentTheme.text.secondary} text-xl max-w-2xl mx-auto">
+      <p class="{currentTheme.text.secondary} text-lg sm:text-xl max-w-2xl mx-auto px-4 sm:px-0 drop-shadow-md">
         Professional acting services across multiple mediums and genres
       </p>
     </div>
     
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 sm:px-0">
       <Card hover float class="group">
         <div class="rounded-2xl bg-gradient-to-br from-red-400/30 to-pink-500/30 w-16 h-16 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
           <Camera class="w-8 h-8 text-white" />
@@ -71,12 +74,12 @@
         <Badge variant="success" size="sm">Available</Badge>
       </Card>
 
-      <Card hover class="group animate-bounce delay-300">
-        <div class="rounded-2xl bg-gradient-to-br from-purple-400/30 to-blue-500/30 w-16 h-16 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-          <Star class="w-8 h-8 text-white" />
+      <Card hover class="group animate-bounce delay-300 sm:col-span-2 lg:col-span-1">
+        <div class="rounded-2xl bg-gradient-to-br from-purple-400/40 to-blue-500/40 w-16 h-16 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
+          <Star class="w-8 h-8 text-white drop-shadow-lg" />
         </div>
-        <h3 class="{currentTheme.text.primary} text-2xl font-bold mb-4">Theater</h3>
-        <p class="{currentTheme.text.secondary} mb-6 leading-relaxed">
+        <h3 class="{currentTheme.text.primary} text-xl sm:text-2xl font-bold mb-4">Theater</h3>
+        <p class="{currentTheme.text.secondary} mb-6 leading-relaxed text-sm sm:text-base">
           Stage-trained with extensive theater background. Skilled in classical, contemporary, and experimental theater productions.
         </p>
         <Badge variant="info" size="sm">Stage Ready</Badge>
@@ -183,41 +186,43 @@
   </div>
 
   <!-- Contact Section -->
-  <div class="relative z-10 py-20">
+  <div class="relative z-10 py-12 sm:py-16 lg:py-20">
     <div class="container mx-auto px-4 text-center">
       <Card variant="frosted" class="max-w-4xl mx-auto">
-        <h2 class="{currentTheme.text.primary} text-4xl md:text-5xl font-bold mb-6">
+        <h2 class="{currentTheme.text.primary} text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 drop-shadow-2xl">
           Let's Work Together
         </h2>
-        <p class="{currentTheme.text.secondary} text-xl mb-8 leading-relaxed">
+        <p class="{currentTheme.text.secondary} text-lg sm:text-xl mb-8 leading-relaxed drop-shadow-md px-4 sm:px-0">
           Ready to bring your project to life? I'm available for new opportunities and excited to collaborate on meaningful stories.
         </p>
         
         <!-- Contact Options -->
-        <div class="flex gap-4 justify-center flex-wrap mb-8">
-          <Button size="xl" class="hover:scale-110 hover:rotate-1 transition-all">
-            <Mail class="w-6 h-6" />
-            Email Me
+        <div class="flex gap-3 sm:gap-4 justify-center flex-wrap mb-8">
+          <Button size="xl" class="hover:scale-110 hover:rotate-1 transition-all shadow-xl shadow-white/20 ring-2 ring-white/20">
+            <Mail class="w-5 h-5 sm:w-6 sm:h-6" />
+            <span class="hidden sm:inline">Email Me</span>
+            <span class="sm:hidden">Email</span>
           </Button>
-          <Button size="xl" variant="outline" class="hover:scale-110 hover:-rotate-1 transition-all">
-            <Phone class="w-6 h-6" />
-            Schedule Call
+          <Button size="xl" variant="outline" class="hover:scale-110 hover:-rotate-1 transition-all shadow-lg shadow-white/10">
+            <Phone class="w-5 h-5 sm:w-6 sm:h-6" />
+            <span class="hidden sm:inline">Schedule Call</span>
+            <span class="sm:hidden">Call</span>
           </Button>
         </div>
 
         <!-- Social Links -->
-        <div class="flex gap-4 justify-center">
-          <Button variant="ghost" size="sm" class="hover:scale-110">
-            <Instagram class="w-5 h-5" />
-            Instagram
+        <div class="flex gap-2 sm:gap-4 justify-center flex-wrap">
+          <Button variant="ghost" size="sm" class="hover:scale-110 shadow-md shadow-white/10">
+            <Instagram class="w-4 h-4 sm:w-5 sm:h-5" />
+            <span class="hidden sm:inline">Instagram</span>
           </Button>
-          <Button variant="ghost" size="sm" class="hover:scale-110">
-            <Camera class="w-5 h-5" />
-            Portfolio
+          <Button variant="ghost" size="sm" class="hover:scale-110 shadow-md shadow-white/10">
+            <Camera class="w-4 h-4 sm:w-5 sm:h-5" />
+            <span class="hidden sm:inline">Portfolio</span>
           </Button>
-          <Button variant="ghost" size="sm" class="hover:scale-110">
-            <Star class="w-5 h-5" />
-            Showreel
+          <Button variant="ghost" size="sm" class="hover:scale-110 shadow-md shadow-white/10">
+            <Star class="w-4 h-4 sm:w-5 sm:h-5" />
+            <span class="hidden sm:inline">Showreel</span>
           </Button>
         </div>
       </Card>

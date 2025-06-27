@@ -1,4 +1,4 @@
-# SvelteKit App - Technical Stack & Infrastructure
+# SvelteKit Project - Technical Documentation
 
 ## Technology Stack
 
@@ -20,7 +20,7 @@
 ## Infrastructure Setup
 
 ### Domain & SSL
-- **Domain**: https://svelte.prenotacorsi.com
+- **Live Site**: https://svelte.prenotacorsi.com
 - **SSL Certificate**: Let's Encrypt (auto-renewal enabled)
 - **Certificate Path**: `/etc/letsencrypt/live/svelte.prenotacorsi.com/`
 
@@ -204,11 +204,11 @@ export const activeTheme = myTheme;
 ```
 
 ### Production Features
-- **42.9 kB CSS Bundle** - Comprehensive theming with minimal overhead
-- **Glass Morphism Effects** - backdrop-blur, transparency, glass borders
-- **Responsive Design** - Mobile-first approach with breakpoint awareness
-- **Accessibility** - Focus states, ARIA support, semantic HTML
-- **Animation System** - Smooth transitions, hover effects, floating animations
+- **Optimized CSS Bundle** - Comprehensive glassmorphism styling
+- **Glass Morphism Effects** - backdrop-blur, transparency, modern aesthetic
+- **Responsive Design** - Perfect viewing on all devices
+- **SEO Optimized** - Server-side rendering for discoverability
+- **Accessibility** - Focus states, ARIA support, screen reader friendly
 
 ## Security Notes
 

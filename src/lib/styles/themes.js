@@ -38,20 +38,20 @@ export const createTheme = (config) => ({
 
 // Theme presets
 export const themes = {
-  // Current glassmorphism theme
+  // Enhanced crystal glassmorphism theme - WOW effect
   glassmorphism: createTheme({
     primary: 'purple',
     secondary: 'pink',
     accent: 'blue',
-    glassBackground: 'bg-white/12',
-    glassBlur: 'backdrop-blur-lg',
-    glassBorder: 'border border-white/25',
-    glassShadow: 'shadow-2xl',
-    textPrimary: 'text-white',
-    textSecondary: 'text-white/80',
-    textMuted: 'text-white/60',
-    hoverEffect: 'hover:scale-105 hover:-translate-y-1',
-    transition: 'transition-all duration-300'
+    glassBackground: 'bg-white/8 backdrop-gradient-to-br backdrop-from-white/25 backdrop-to-white/5',
+    glassBlur: 'backdrop-blur-2xl backdrop-saturate-150',
+    glassBorder: 'border border-white/40 ring-1 ring-white/20',
+    glassShadow: 'shadow-3xl drop-shadow-2xl',
+    textPrimary: 'text-white drop-shadow-lg',
+    textSecondary: 'text-white/90 drop-shadow-md',
+    textMuted: 'text-white/70 drop-shadow-sm',
+    hoverEffect: 'hover:scale-110 hover:-translate-y-2 hover:rotate-1 hover:shadow-4xl',
+    transition: 'transition-all duration-500 ease-out'
   }),
   
   // Dark solid theme alternative
@@ -98,11 +98,11 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
     button: {
       base: `inline-flex items-center justify-center gap-2 rounded-xl font-medium ${theme.effects.transition} ${theme.effects.focus} transform active:scale-95 ${theme.effects.hover}`,
       variants: {
-        primary: `${theme.glass.background} ${theme.glass.blur} ${theme.text.primary} ${theme.glass.border} ${theme.glass.shadow}`,
-        secondary: `bg-${theme.colors.secondary}-500/20 ${theme.glass.blur} ${theme.text.secondary} border border-${theme.colors.secondary}-300/30`,
-        outline: `bg-white/5 ${theme.glass.blur} ${theme.text.primary} ${theme.glass.border}`,
-        ghost: `bg-white/5 ${theme.glass.blur} ${theme.text.primary} border-transparent`,
-        destructive: `bg-${theme.colors.error}-500/20 ${theme.glass.blur} text-${theme.colors.error}-100 border border-${theme.colors.error}-300/30`
+        primary: `${theme.glass.background} ${theme.glass.blur} ${theme.text.primary} ${theme.glass.border} ${theme.glass.shadow} shadow-white/10`,
+        secondary: `bg-${theme.colors.secondary}-500/15 ${theme.glass.blur} ${theme.text.secondary} border border-${theme.colors.secondary}-300/40 shadow-lg shadow-${theme.colors.secondary}-500/20`,
+        outline: `bg-white/3 ${theme.glass.blur} ${theme.text.primary} ${theme.glass.border} shadow-inner`,
+        ghost: `bg-white/2 ${theme.glass.blur} ${theme.text.primary} border-transparent hover:bg-white/8`,
+        destructive: `bg-${theme.colors.error}-500/15 ${theme.glass.blur} text-${theme.colors.error}-100 border border-${theme.colors.error}-300/40 shadow-lg shadow-${theme.colors.error}-500/20`
       },
       sizes: {
         sm: 'px-4 py-2 text-sm',
@@ -115,11 +115,11 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
     card: {
       base: `rounded-2xl ${theme.effects.transition} overflow-hidden relative`,
       variants: {
-        default: `${theme.glass.background} ${theme.glass.blur} ${theme.glass.border} ${theme.glass.shadow}`,
-        elevated: `${theme.glass.background} ${theme.glass.blur} border border-white/30 shadow-2xl`,
-        outlined: `bg-white/10 ${theme.glass.blur} border border-white/40`,
-        ghost: `bg-white/5 ${theme.glass.blur} border-transparent`,
-        frosted: `bg-white/8 backdrop-blur-xl border border-white/30 shadow-2xl`
+        default: `${theme.glass.background} ${theme.glass.blur} ${theme.glass.border} ${theme.glass.shadow} shadow-white/5`,
+        elevated: `bg-white/6 ${theme.glass.blur} border border-white/50 ring-2 ring-white/20 shadow-3xl shadow-black/30`,
+        outlined: `bg-white/4 ${theme.glass.blur} border border-white/60 ring-1 ring-white/30 shadow-inner`,
+        ghost: `bg-white/2 ${theme.glass.blur} border-transparent hover:bg-white/6 hover:border-white/20`,
+        frosted: `bg-white/3 backdrop-blur-3xl backdrop-saturate-200 border border-white/50 ring-2 ring-white/15 shadow-4xl shadow-black/20`
       },
       padding: {
         none: '',
@@ -129,8 +129,8 @@ export const getComponentStyles = (component, variant = 'default', size = 'md') 
         xl: 'p-10'
       },
       effects: {
-        hover: 'hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1',
-        float: 'animate-bounce'
+        hover: 'hover:shadow-4xl hover:scale-[1.03] hover:-translate-y-2 hover:ring-2 hover:ring-white/30',
+        float: 'animate-bounce hover:animate-pulse'
       }
     },
     

@@ -15,7 +15,8 @@
 </script>
 
 <div class={cardClasses} {...$$restProps}>
-  <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl pointer-events-none"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-white/25 via-white/15 to-white/5 rounded-2xl pointer-events-none shadow-inner"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/15 rounded-2xl pointer-events-none"></div>
   <div class="relative z-10">
     <slot />
   </div>

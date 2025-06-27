@@ -1,19 +1,46 @@
-# SvelteKit + Tailwind CSS v4
+# Cinzia - Professional Actress Portfolio
 
-A modern, high-performance web application built with the latest versions of SvelteKit and Tailwind CSS v4, featuring a custom component system and server-side rendering.
+A stunning glassmorphism-themed actress portfolio built with SvelteKit and revolutionary centralized theming system. Features professional branding, portfolio showcase, and contact management.
 
-## 🚀 Live Demo
+## 🎭 Live Portfolio
 
-**Production Site**: [https://svelte.prenotacorsi.com](https://svelte.prenotacorsi.com)
+**Cinzia's Portfolio**: [https://svelte.prenotacorsi.com](https://svelte.prenotacorsi.com)
 
 ## ✨ Features
 
+### Professional Actress Portfolio
+- **Personal Branding** - Professional actress presentation with "Cinzia" persona
+- **Acting Services** - Film/TV, Theater, and Commercial acting showcase
+- **Portfolio Highlights** - Recent projects, skills, training, and awards
+- **Contact Management** - Multiple contact options and social media integration
+- **Responsive Design** - Perfect on all devices with mobile-first approach
+
+### Revolutionary Theming System
+- **One-Line Theme Switching** - Change entire site theme instantly
+- **Pure Tailwind CSS v4** - Zero custom CSS, only utility classes
+- **Glassmorphism Effects** - Stunning backdrop-blur and transparency effects
+- **Centralized Control** - All styling managed from single configuration file
+
+### Technical Excellence
 - **SvelteKit 2.16.0** - Latest full-stack framework with SSR
-- **Tailwind CSS 4.1.11** - Latest version with 5x faster builds and zero configuration
-- **Custom Component System** - Fully themeable UI components built with pure Tailwind
-- **Modern Icons** - 570+ icons from lucide-svelte
+- **Tailwind CSS 4.1.11** - Latest version with 5x faster builds
+- **46.18kB CSS Bundle** - Optimized glassmorphism styling
 - **Production Ready** - Deployed with Nginx, SSL, and systemd service
-- **Performance Optimized** - Incremental builds in microseconds
+
+## 🎨 Theming System
+
+### Instant Theme Switching
+```javascript
+// Change entire portfolio theme with one line:
+export const activeTheme = themes.glassmorphism;
+// Available: themes.glassmorphism, themes.dark, themes.light
+```
+
+### Benefits for Agencies
+- **Multi-Client Support** - Perfect for talent agencies with multiple actors
+- **Brand Consistency** - Maintain consistent styling across all portfolios
+- **A/B Testing** - Quick design variations for different audiences
+- **Seasonal Themes** - Holiday or event-specific styling
 
 ## 🛠️ Technology Stack
 
@@ -23,14 +50,14 @@ A modern, high-performance web application built with the latest versions of Sve
 - **Tailwind CSS v4** - Utility-first CSS with modern features
 - **Vite 6.2** - Lightning-fast build tool
 
-### UI Components
-- **Button** - Multiple variants and sizes with focus states
-- **Card** - Flexible containers with hover effects
-- **Badge** - Semantic status indicators
-- **Theme System** - Centralized design tokens
+### UI Components (Theme-Aware)
+- **Button** - Multiple variants with glassmorphism effects
+- **Card** - Portfolio cards with backdrop-blur
+- **Badge** - Status indicators for skills and availability
+- **Centralized Theming** - All components inherit theme automatically
 
 ### Backend & Deployment
-- **Node.js Adapter** - Server-side rendering
+- **Node.js Adapter** - Server-side rendering for SEO
 - **Nginx** - Reverse proxy with SSL termination
 - **Let's Encrypt** - Automatic SSL certificate management
 - **Systemd** - Process management and auto-restart
@@ -48,6 +75,9 @@ A modern, high-performance web application built with the latest versions of Sve
 git clone https://github.com/webinadvance/sveltekit.git
 cd sveltekit
 
+# Switch to actress portfolio branch
+git checkout cinzia
+
 # Install dependencies
 npm install
 
@@ -55,7 +85,7 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:5173` to see the app running.
+Visit `http://localhost:5173` to see the actress portfolio.
 
 ### Build for Production
 
@@ -73,72 +103,70 @@ npm run preview
 src/
 ├── lib/
 │   ├── components/
-│   │   └── ui/           # Custom UI components
+│   │   └── ui/           # Theme-aware UI components
 │   │       ├── Button.svelte
 │   │       ├── Card.svelte
 │   │       ├── Badge.svelte
 │   │       └── index.js
 │   └── styles/
-│       └── theme.js      # Design system configuration
+│       └── themes.js     # Centralized theme system
 ├── routes/
 │   ├── +layout.svelte    # Global layout
-│   └── +page.svelte      # Landing page
+│   └── +page.svelte      # Actress portfolio page
 ├── app.html              # HTML template
-└── app.css               # Tailwind CSS imports
+└── app.css               # Minimal Tailwind imports
 ```
 
-## 🎨 Component System
+## 🎨 Theme Customization
 
-### Button Component
+### Creating Custom Themes
+
+```javascript
+// Easy custom theme creation in themes.js:
+const myTheme = createTheme({
+  primary: 'emerald',
+  secondary: 'teal', 
+  glassBackground: 'bg-emerald-500/10',
+  textPrimary: 'text-emerald-100',
+  // ... other customizations
+});
+
+// Apply custom theme:
+export const activeTheme = myTheme;
+```
+
+### Component Usage
 
 ```svelte
 <script>
-  import { Button } from '$lib/components/ui';
+  import { Button, Card, Badge } from '$lib/components/ui';
 </script>
 
-<Button variant="primary" size="lg">
-  Click me
-</Button>
-```
-
-**Variants**: `primary`, `secondary`, `outline`, `ghost`, `destructive`  
-**Sizes**: `sm`, `md`, `lg`, `xl`
-
-### Card Component
-
-```svelte
-<script>
-  import { Card } from '$lib/components/ui';
-</script>
-
-<Card variant="elevated" hover>
-  <h3>Card Title</h3>
-  <p>Card content goes here</p>
+<!-- Components automatically inherit active theme -->
+<Card variant="frosted" hover>
+  <h3>Portfolio Item</h3>
+  <p>Description of work...</p>
+  <Badge variant="success">Available</Badge>
+  <Button>Contact Me</Button>
 </Card>
 ```
 
-**Variants**: `default`, `elevated`, `outlined`, `ghost`  
-**Features**: Configurable padding, hover effects, flexible slots
+## 🎭 Portfolio Sections
 
-### Badge Component
+### Acting Services
+- **Film & Television** - Feature films, TV series, streaming platforms
+- **Theater** - Stage productions, classical and contemporary
+- **Commercials** - Lifestyle, beauty, fashion, product advertisements
 
-```svelte
-<script>
-  import { Badge } from '$lib/components/ui';
-</script>
+### Portfolio Highlights
+- **Recent Projects** - Latest film and TV work
+- **Skills & Training** - Acting techniques, special skills, education
+- **Awards & Recognition** - Industry awards and nominations
 
-<Badge variant="success">Active</Badge>
-```
-
-**Variants**: `default`, `secondary`, `success`, `warning`, `error`, `info`, `outline`
-
-## 🎯 Tailwind CSS v4 Features
-
-- **Zero Configuration** - No config files needed
-- **Automatic Content Detection** - Scans all template files automatically
-- **Enhanced Performance** - 5x faster full builds, 100x faster incremental builds
-- **Modern CSS Features** - Cascade layers, custom properties, color-mix()
-- **Vite Integration** - Dedicated plugin for optimal performance
+### Contact Options
+- **Email** - Direct professional contact
+- **Phone** - Scheduling calls and meetings
+- **Social Media** - Instagram, portfolio, showreel links
 
 ## 🔧 Development Commands
 
@@ -158,20 +186,25 @@ sudo systemctl status sveltekit-app   # Check status
 
 ## 🚀 Deployment
 
-The app is configured for production deployment with:
+The actress portfolio is configured for production deployment with:
 
 - **Nginx** reverse proxy configuration
 - **SSL/HTTPS** with Let's Encrypt
 - **Systemd** service for process management
-- **Node.js adapter** for SSR
+- **Node.js adapter** for SSR and SEO optimization
 
 See `CLAUDE.md` for detailed deployment instructions.
 
 ## 📖 Documentation
 
 - **Technical Details**: See `CLAUDE.md` for comprehensive technical documentation
-- **Component Examples**: Visit the live demo for interactive component showcase
-- **Deployment Guide**: Complete server setup and deployment instructions
+- **Theme System**: Complete guide to the centralized theming architecture
+- **Deployment Guide**: Server setup and deployment instructions
+
+## 🌿 Branches
+
+- **Main Branch**: Original theming system demo
+- **Cinzia Branch**: Professional actress portfolio (current deployment)
 
 ## 🤝 Contributing
 
@@ -187,11 +220,12 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔗 Links
 
-- **Live Demo**: [https://svelte.prenotacorsi.com](https://svelte.prenotacorsi.com)
+- **Live Portfolio**: [https://svelte.prenotacorsi.com](https://svelte.prenotacorsi.com)
+- **GitHub Repository**: [https://github.com/webinadvance/sveltekit](https://github.com/webinadvance/sveltekit)
+- **Cinzia Branch**: [https://github.com/webinadvance/sveltekit/tree/cinzia](https://github.com/webinadvance/sveltekit/tree/cinzia)
 - **SvelteKit Docs**: [https://kit.svelte.dev](https://kit.svelte.dev)
 - **Tailwind CSS v4**: [https://tailwindcss.com](https://tailwindcss.com)
-- **Lucide Icons**: [https://lucide.dev](https://lucide.dev)
 
 ---
 
-Built with ❤️ using SvelteKit and Tailwind CSS v4
+Built with ❤️ for professional actresses using SvelteKit and Tailwind CSS v4
