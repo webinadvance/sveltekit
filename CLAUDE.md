@@ -268,3 +268,74 @@ export const activeTheme = myTheme;
 - **Service monitoring** - Systemd auto-restart on failures
 - **Log management** - Centralized logging via journalctl and Nginx logs
 - **SSL automation** - Certbot handles certificate renewal
+
+## DRY Architecture & Component System
+
+### Component-Based Architecture
+This project follows **strict DRY (Don't Repeat Yourself) principles** with a fully component-based architecture:
+
+#### Core Principles
+- **Zero Code Duplication** - Every piece of functionality exists in exactly one place
+- **Semantic Components** - Components organized by semantic meaning and purpose
+- **Reusable by Design** - All components built for maximum reusability
+- **Props-Based Configuration** - Components configured via props, not hard-coded values
+- **Centralized Data** - All content managed in `/src/lib/data/portfolio.js`
+
+#### Component Library (`/src/lib/components/sections/`)
+```javascript
+// 10 Semantic Section Components:
+- Hero.svelte           // Hero sections with customizable content
+- Biography.svelte      // About/bio sections with flexible layouts
+- PortfolioGallery.svelte // Category-based image galleries
+- PhotoGallery.svelte   // Professional image grid displays  
+- CurrentShows.svelte   // Current productions/shows listing
+- Experience.svelte     // Work experience sections (theater/cinema/TV)
+- Showreel.svelte      // Video content showcase
+- DigitalProjects.svelte // Digital projects and training sections
+- Contact.svelte       // Contact information sections
+- Footer.svelte        // Site footer with links and info
+```
+
+#### Data-Driven Design (`/src/lib/data/portfolio.js`)
+```javascript
+// Centralized configuration for all components:
+export const heroData = { title, subtitle, backgroundImage, badges, actions };
+export const biographyData = { content, awards, personalInfo, skills };
+export const portfolioGalleryData = { categories, images };
+export const photoGalleryData = { title, subtitle, images };
+// ... all other component data
+```
+
+#### Main Page Structure (`/src/routes/+page.svelte`)
+```svelte
+<!-- DRY component usage with spread operator -->
+<Hero {...heroData} />
+<Biography {...biographyData} />
+<PortfolioGallery {...portfolioGalleryData} backgroundColor={appBackground} />
+<PhotoGallery {...photoGalleryData} />
+<CurrentShows {...currentShowsData} />
+<Experience {...experienceData} />
+<Showreel {...showreelData} />
+<DigitalProjects {...digitalProjectsData} {scrollY} />
+<Contact {...contactData} />
+<Footer {...footerData} />
+```
+
+### DRY Benefits Achieved
+- **Main page reduced from 700+ lines to 76 lines** (90% reduction)
+- **Zero hard-coded content** - everything configurable via props
+- **Instant theme changes** - modify data file, redeploy
+- **Easy maintenance** - single source of truth for all content
+- **Scalable architecture** - add new pages by combining existing components
+- **Future-proof** - components work for any similar project
+
+### Development Workflow
+1. **Make Changes** - Edit component props or data in `/src/lib/data/portfolio.js`
+2. **Deploy** - Run `./deploy.sh` for automated build and deployment
+3. **Verify** - Check https://cinziabrugnola.com
+
+### IMPORTANT: Always Maintain DRY Principles
+- **Never duplicate code** - Use existing components or extend them
+- **Never hard-code content** - Always use props and data configuration
+- **Always use `./deploy.sh`** - Never deploy manually to maintain consistency
+- **Component first** - Before writing new code, check if existing components can be extended

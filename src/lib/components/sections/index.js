@@ -1,0 +1,10 @@
+export { default as Hero } from './Hero.svelte';
+export { default as Biography } from './Biography.svelte';
+export { default as PortfolioGallery } from './PortfolioGallery.svelte';
+export { default as PhotoGallery } from './PhotoGallery.svelte';
+export { default as CurrentShows } from './CurrentShows.svelte';
+export { default as Experience } from './Experience.svelte';
+export { default as Showreel } from './Showreel.svelte';
+export { default as DigitalProjects } from './DigitalProjects.svelte';
+export { default as Contact } from './Contact.svelte';
+export { default as Footer } from './Footer.svelte';
