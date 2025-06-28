@@ -269,73 +269,93 @@ export const activeTheme = myTheme;
 - **Log management** - Centralized logging via journalctl and Nginx logs
 - **SSL automation** - Certbot handles certificate renewal
 
-## DRY Architecture & Component System
+# Super Dynamic CMS - Technical Architecture
 
-### Component-Based Architecture
-This project follows **strict DRY (Don't Repeat Yourself) principles** with a fully component-based architecture:
+## Core Philosophy: SUPER DRY APPROACH
 
-#### Core Principles
-- **Zero Code Duplication** - Every piece of functionality exists in exactly one place
-- **Semantic Components** - Components organized by semantic meaning and purpose
-- **Reusable by Design** - All components built for maximum reusability
-- **Props-Based Configuration** - Components configured via props, not hard-coded values
-- **Centralized Data** - All content managed in `/src/lib/data/portfolio.js`
+### Everything is a Component
+- **Database-Driven Components**: Every visual element is a reusable component that gets its data from the database
+- **Zero Hard-Coding**: No content is hard-coded in components - everything comes from database props
+- **Maximum Reusability**: Same component can be used multiple times across different pages with different data
+- **Component-Based Architecture**: Pages are just collections of components with their respective data
 
-#### Component Library (`/src/lib/components/sections/`)
+### Database Structure
+```sql
+-- Pages: Define routes and meta data
+pages (id, slug, title, meta_description, meta_keywords, og_image, is_published)
+
+-- Components: Define available component types  
+components (id, name, display_name, description, schema, template_path, is_active)
+
+-- Page Components: Link pages to components with data
+page_components (id, page_id, component_id, component_data, display_order, is_active)
+
+-- Media: File uploads and assets
+media (id, filename, url, thumbnail_url, alt_text, caption, mime_type, file_size)
+
+-- Settings: Global configuration
+settings (key, value, type, category, description)
+```
+
+### Component Data Flow
+1. **Page Request** → Database loads page by slug
+2. **Components Loading** → Database loads all components for that page with their data
+3. **Dynamic Rendering** → Each component receives its data as props from database
+4. **SSR Delivery** → Server-side rendered page with all data
+
+### Example Component Usage
 ```javascript
-// 10 Semantic Section Components:
-- Hero.svelte           // Hero sections with customizable content
-- Biography.svelte      // About/bio sections with flexible layouts
-- PortfolioGallery.svelte // Category-based image galleries
-- PhotoGallery.svelte   // Professional image grid displays  
-- CurrentShows.svelte   // Current productions/shows listing
-- Experience.svelte     // Work experience sections (theater/cinema/TV)
-- Showreel.svelte      // Video content showcase
-- DigitalProjects.svelte // Digital projects and training sections
-- Contact.svelte       // Contact information sections
-- Footer.svelte        // Site footer with links and info
+// Database stores:
+{
+  page_id: 1,
+  component_id: 'hero',
+  component_data: {
+    title: "Welcome to Our Site",
+    subtitle: "Dynamic content from database",
+    background_image: "/uploads/hero-bg.jpg",
+    cta_text: "Get Started",
+    cta_link: "/contact"
+  }
+}
+
+// Component receives:
+<Hero 
+  title="Welcome to Our Site"
+  subtitle="Dynamic content from database" 
+  background_image="/uploads/hero-bg.jpg"
+  cta_text="Get Started"
+  cta_link="/contact"
+/>
 ```
 
-#### Data-Driven Design (`/src/lib/data/portfolio.js`)
-```javascript
-// Centralized configuration for all components:
-export const heroData = { title, subtitle, backgroundImage, badges, actions };
-export const biographyData = { content, awards, personalInfo, skills };
-export const portfolioGalleryData = { categories, images };
-export const photoGalleryData = { title, subtitle, images };
-// ... all other component data
-```
+### Benefits of Super DRY Approach
+- **Content Management**: Non-technical users can manage content through admin interface
+- **Developer Efficiency**: Write component once, use everywhere with different data
+- **Scalability**: Easy to add new pages by combining existing components
+- **Maintainability**: Single source of truth for all content in database
+- **Performance**: SSR ensures fast loading with full SEO benefits
 
-#### Main Page Structure (`/src/routes/+page.svelte`)
-```svelte
-<!-- DRY component usage with spread operator -->
-<Hero {...heroData} />
-<Biography {...biographyData} />
-<PortfolioGallery {...portfolioGalleryData} backgroundColor={appBackground} />
-<PhotoGallery {...photoGalleryData} />
-<CurrentShows {...currentShowsData} />
-<Experience {...experienceData} />
-<Showreel {...showreelData} />
-<DigitalProjects {...digitalProjectsData} {scrollY} />
-<Contact {...contactData} />
-<Footer {...footerData} />
-```
+### Component Types
+- `Hero` - Hero sections with title, subtitle, background, CTA
+- `TextBlock` - Rich text content with alignment options
+- `ImageGallery` - Image grids with lightbox functionality  
+- `ContactForm` - Contact forms with customizable fields
+- `VideoEmbed` - Video embeds from YouTube/Vimeo
+- `Testimonials` - Customer testimonials and reviews
+- `FAQ` - Frequently asked questions sections
+- `PricingTable` - Pricing plans and features
+- `TeamMembers` - Team/staff member profiles
+- `BlogPosts` - Blog post listings and content
 
-### DRY Benefits Achieved
-- **Main page reduced from 700+ lines to 76 lines** (90% reduction)
-- **Zero hard-coded content** - everything configurable via props
-- **Instant theme changes** - modify data file, redeploy
-- **Easy maintenance** - single source of truth for all content
-- **Scalable architecture** - add new pages by combining existing components
-- **Future-proof** - components work for any similar project
+### Database-Driven Features
+- **Dynamic Routing**: Pages created in database automatically become routes
+- **Component Ordering**: Display order controlled via database
+- **Content Versioning**: Track content changes over time
+- **Multi-language Support**: Same components, different language data
+- **A/B Testing**: Different component data for testing variations
 
-### Development Workflow
-1. **Make Changes** - Edit component props or data in `/src/lib/data/portfolio.js`
-2. **Deploy** - Run `./deploy.sh` for automated build and deployment
-3. **Verify** - Check https://cinziabrugnola.com
-
-### IMPORTANT: Always Maintain DRY Principles
-- **Never duplicate code** - Use existing components or extend them
-- **Never hard-code content** - Always use props and data configuration
-- **Always use `./deploy.sh`** - Never deploy manually to maintain consistency
-- **Component first** - Before writing new code, check if existing components can be extended
+### IMPORTANT: Always Maintain Super DRY Principles
+- **Everything comes from database** - No hard-coded content in components
+- **Components are pure** - Only receive props, render based on data
+- **Reuse over recreation** - Use existing components with different data
+- **Database is single source of truth** - All content managed through database
