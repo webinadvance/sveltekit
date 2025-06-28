@@ -1,4 +1,4 @@
-import { Theater, Camera, Heart, Users, Star, Mail, Phone, Play } from 'lucide-svelte';
+// Icons will be added client-side to avoid SSR serialization issues
 
 export const heroData = {
   title: 'Cinzia Brugnola',
@@ -60,7 +60,7 @@ export const portfolioGalleryData = {
     {
       id: 'theater',
       title: 'Teatro',
-      icon: Theater,
+      iconType: 'theater',
       images: [
         { url: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800', alt: 'Teatro - Imitationofdeath' },
         { url: 'https://images.unsplash.com/photo-1581683705068-ca8f49fc7f45?q=80&w=800', alt: 'Teatro - Compagnia Duchessa Rossa' },
@@ -73,7 +73,7 @@ export const portfolioGalleryData = {
     {
       id: 'cinema',
       title: 'Cinema',
-      icon: Camera,
+      iconType: 'camera',
       images: [
         { url: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800', alt: 'Cinema - The Lack' },
         { url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800', alt: 'Cinema - Masbedo' },
@@ -85,7 +85,7 @@ export const portfolioGalleryData = {
     {
       id: 'portraits',
       title: 'Ritratti Professionali',
-      icon: Heart,
+      iconType: 'heart',
       aspectRatio: 'h-80',
       images: [
         { url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800', alt: 'Ritratto - Studio' },
@@ -99,7 +99,7 @@ export const portfolioGalleryData = {
     {
       id: 'backstage',
       title: 'Backstage',
-      icon: Users,
+      iconType: 'users',
       images: [
         { url: 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?q=80&w=800', alt: 'Backstage - Preparazione' },
         { url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800', alt: 'Backstage - Trucco' },
@@ -153,7 +153,7 @@ export const experienceData = {
     {
       id: 'theater',
       title: 'Teatro',
-      icon: Theater,
+      iconType: 'theater',
       backgroundImage: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=2069',
       projects: [
         {
@@ -169,7 +169,7 @@ export const experienceData = {
     {
       id: 'cinema',
       title: 'Cinema',
-      icon: Camera,
+      iconType: 'camera',
       backgroundImage: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070',
       projects: [
         {
@@ -182,7 +182,7 @@ export const experienceData = {
     {
       id: 'tv',
       title: 'Televisione',
-      icon: Play,
+      iconType: 'play',
       backgroundImage: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?q=80&w=2070',
       projects: [
         {
@@ -205,8 +205,7 @@ export const showreelData = {
   video: {
     thumbnailUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2070',
     title: 'Cinzia Brugnola - Showreel 2024',
-    duration: '3:45',
-    onClick: () => console.log('Play showreel')
+    duration: '3:45'
   }
 };
 
@@ -221,21 +220,21 @@ export const contactData = {
     email: 'clan@clangroup.it'
   },
   socialMedia: [
-    { name: 'Svamp Channel', icon: Star },
-    { name: 'LinkedIn', icon: Camera }
+    { name: 'Svamp Channel', iconType: 'star' },
+    { name: 'LinkedIn', iconType: 'camera' }
   ],
   callToAction: {
     title: 'Disponibile per Nuovi Progetti',
     buttons: [
       {
         text: 'Contatta Agenzia',
-        icon: Mail,
+        iconType: 'mail',
         variant: 'primary',
         class: 'bg-white text-gray-900 hover:bg-gray-100'
       },
       {
         text: 'Vedi Showreel',
-        icon: Star,
+        iconType: 'star',
         variant: 'outline',
         class: 'text-white border-white hover:bg-white hover:text-gray-900'
       }
@@ -347,8 +346,8 @@ export const footerData = {
     email: 'clan@clangroup.it'
   },
   socialLinks: [
-    { icon: Mail, href: '#', ariaLabel: 'Email' },
-    { icon: Phone, href: '#', ariaLabel: 'Phone' }
+    { iconType: 'mail', href: '#', ariaLabel: 'Email' },
+    { iconType: 'phone', href: '#', ariaLabel: 'Phone' }
   ],
   copyright: '© 2024 Cinzia Brugnola. Tutti i diritti riservati.'
 };

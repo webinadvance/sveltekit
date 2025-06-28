@@ -446,9 +446,8 @@ export function initializeDatabase() {
         );
 
         -- Create indexes for better performance
-        CREATE INDEX IF NOT EXISTS idx_portfolio_category ON portfolio_items(category);
-        CREATE INDEX IF NOT EXISTS idx_portfolio_featured ON portfolio_items(featured);
-        CREATE INDEX IF NOT EXISTS idx_portfolio_order ON portfolio_items(display_order);
+        CREATE INDEX IF NOT EXISTS idx_gallery_categories_order ON gallery_categories(display_order);
+        CREATE INDEX IF NOT EXISTS idx_gallery_images_category ON gallery_images(category_id);
         CREATE INDEX IF NOT EXISTS idx_messages_read ON contact_messages(read);
         CREATE INDEX IF NOT EXISTS idx_visits_page ON page_visits(page_path);
         CREATE INDEX IF NOT EXISTS idx_visits_date ON page_visits(created_at);

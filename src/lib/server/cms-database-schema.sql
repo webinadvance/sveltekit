@@ -95,7 +95,6 @@ CREATE TABLE IF NOT EXISTS gallery_categories (
     gallery_component_id INTEGER NOT NULL,
     slug TEXT NOT NULL,
     name TEXT NOT NULL,
-    icon TEXT,
     display_order INTEGER DEFAULT 0,
     FOREIGN KEY (gallery_component_id) REFERENCES gallery_components(id) ON DELETE CASCADE,
     UNIQUE(gallery_component_id, slug)
@@ -146,7 +145,6 @@ CREATE TABLE IF NOT EXISTS list_items (
     item_key TEXT,
     item_value TEXT,
     description TEXT,
-    icon TEXT,
     date TEXT,
     metadata JSON,
     display_order INTEGER DEFAULT 0,
@@ -258,7 +256,6 @@ CREATE TABLE IF NOT EXISTS menu_items (
     title TEXT NOT NULL,
     url TEXT,
     page_id INTEGER,
-    icon TEXT,
     css_class TEXT,
     target TEXT DEFAULT '_self',
     display_order INTEGER DEFAULT 0,

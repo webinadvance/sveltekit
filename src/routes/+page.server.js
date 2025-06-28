@@ -1,4 +1,4 @@
-import { db } from '$lib/server/database.js';
+import { pages } from '$lib/server/db-utils.js';
 import { 
     heroData,
     biographyData,
@@ -12,48 +12,93 @@ import {
     footerData
 } from '$lib/data/portfolio.js';
 
+// Helper to serialize data for SSR (remove ALL functions and icon properties)
+function serializeForSSR(data) {
+    function deepClone(obj) {
+        if (obj === null || typeof obj !== 'object') {
+            return obj;
+        }
+        
+        if (typeof obj === 'function') {
+            return undefined; // Remove functions
+        }
+        
+        if (Array.isArray(obj)) {
+            return obj.map(deepClone).filter(item => item !== undefined);
+        }
+        
+        const cloned = {};
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key) && 
+                key !== 'icon' && 
+                key !== 'onClick' && 
+                key !== 'onPlay') {
+                
+                const value = obj[key];
+                
+                // Skip function values but keep all other properties
+                if (typeof value !== 'function') {
+                    const clonedValue = deepClone(value);
+                    if (clonedValue !== undefined) {
+                        cloned[key] = clonedValue;
+                    }
+                }
+            }
+        }
+        return cloned;
+    }
+    
+    return deepClone(data);
+}
+
 // This runs on the server during SSR
 export async function load() {
     try {
-        // Check if we have data in database
-        const pageCheck = db.prepare('SELECT COUNT(*) as count FROM pages WHERE slug = ?').get('/');
+        // Try to load page from database first
+        const dbPage = pages.getBySlug('/');
         
-        if (pageCheck?.count > 0) {
-            // Load from database (future implementation)
-            // For now, just return static data
-            console.log('Database has data, but loading from static for now');
+        if (dbPage && dbPage.sections && dbPage.sections.length > 0) {
+            // Return database data (CMS mode)
+            return {
+                useDatabase: true,
+                pageData: dbPage,
+                meta: {
+                    title: dbPage.title,
+                    description: dbPage.meta_description
+                }
+            };
         }
         
-        // Return static data for now
+        // Fallback to static data (hardcoded icons will be added client-side)
         return {
-            heroData,
-            biographyData,
-            portfolioGalleryData,
-            photoGalleryData,
-            currentShowsData,
-            experienceData,
-            showreelData,
-            digitalProjectsData,
-            contactData,
-            footerData,
-            useDatabase: false // Flag to indicate data source
+            useDatabase: false,
+            heroData: serializeForSSR(heroData),
+            biographyData: serializeForSSR(biographyData),
+            portfolioGalleryData: serializeForSSR(portfolioGalleryData),
+            photoGalleryData: serializeForSSR(photoGalleryData),
+            currentShowsData: serializeForSSR(currentShowsData),
+            experienceData: serializeForSSR(experienceData),
+            showreelData: serializeForSSR(showreelData),
+            digitalProjectsData: serializeForSSR(digitalProjectsData),
+            contactData: serializeForSSR(contactData),
+            footerData: serializeForSSR(footerData)
         };
     } catch (error) {
-        console.error('Database error, falling back to static data:', error);
+        console.error('Error loading page data:', error);
         
-        // Fallback to static data
+        // Return static data as fallback
         return {
-            heroData,
-            biographyData,
-            portfolioGalleryData,
-            photoGalleryData,
-            currentShowsData,
-            experienceData,
-            showreelData,
-            digitalProjectsData,
-            contactData,
-            footerData,
-            useDatabase: false
+            useDatabase: false,
+            heroData: serializeForSSR(heroData),
+            biographyData: serializeForSSR(biographyData),
+            portfolioGalleryData: serializeForSSR(portfolioGalleryData),
+            photoGalleryData: serializeForSSR(photoGalleryData),
+            currentShowsData: serializeForSSR(currentShowsData),
+            experienceData: serializeForSSR(experienceData),
+            showreelData: serializeForSSR(showreelData),
+            digitalProjectsData: serializeForSSR(digitalProjectsData),
+            contactData: serializeForSSR(contactData),
+            footerData: serializeForSSR(footerData)
         };
     }
 }
