@@ -16,19 +16,8 @@
     Footer
   } from '$lib/components/sections';
   
-  // Import data configuration
-  import {
-    heroData,
-    biographyData,
-    portfolioGalleryData,
-    photoGalleryData,
-    currentShowsData,
-    experienceData,
-    showreelData,
-    digitalProjectsData,
-    contactData,
-    footerData
-  } from '$lib/data/portfolio.js';
+  // Data now comes from server (SSR)
+  export let data;
   
   $: appBackground = getAppBackground();
   
@@ -48,33 +37,33 @@
 <div class="min-h-screen overflow-x-hidden">
 
   <!-- Hero Section -->
-  <Hero {...heroData} />
+  <Hero {...data.heroData} />
 
   <!-- Biography Section -->
-  <Biography {...biographyData} />
+  <Biography {...data.biographyData} />
 
   <!-- Portfolio Gallery Section -->
-  <PortfolioGallery {...portfolioGalleryData} backgroundColor={appBackground} />
+  <PortfolioGallery {...data.portfolioGalleryData} backgroundColor={appBackground} />
 
   <!-- Portfolio Gallery Grid Section -->
-  <PhotoGallery {...photoGalleryData} />
+  <PhotoGallery {...data.photoGalleryData} />
 
   <!-- Current Shows Section -->
-  <CurrentShows {...currentShowsData} />
+  <CurrentShows {...data.currentShowsData} />
 
   <!-- Experience Section -->
-  <Experience {...experienceData} />
+  <Experience {...data.experienceData} />
 
   <!-- Showreel Section -->
-  <Showreel {...showreelData} />
+  <Showreel {...data.showreelData} />
 
   <!-- Digital Projects and Training Section -->
-  <DigitalProjects {...digitalProjectsData} {scrollY} />
+  <DigitalProjects {...data.digitalProjectsData} {scrollY} />
 
   <!-- Contact Section -->
-  <Contact {...contactData} />
+  <Contact {...data.contactData} />
 
   <!-- Footer -->
-  <Footer {...footerData} />
+  <Footer {...data.footerData} />
 
 </div>
