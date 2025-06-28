@@ -6,7 +6,7 @@ export async function load({ params }) {
         // Build the slug from params
         let slug = params.slug ? `/${params.slug}` : '/';
         
-        // Handle homepage routes - both / and /home should load the homepage
+        // Handle homepage route - /home loads the homepage data
         if (slug === '/home') {
             slug = '/';
         }

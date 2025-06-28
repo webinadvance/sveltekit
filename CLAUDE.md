@@ -354,8 +354,163 @@ settings (key, value, type, category, description)
 - **Multi-language Support**: Same components, different language data
 - **A/B Testing**: Different component data for testing variations
 
-### IMPORTANT: Always Maintain Super DRY Principles
-- **Everything comes from database** - No hard-coded content in components
-- **Components are pure** - Only receive props, render based on data
-- **Reuse over recreation** - Use existing components with different data
-- **Database is single source of truth** - All content managed through database
+## Data Binding Architecture
+
+### How Data Flows Through the System
+The super DRY architecture uses a three-table system to bind data to pages and components:
+
+#### 1. Pages Table - Route Definitions
+```sql
+pages (id, slug, title, meta_description, meta_keywords, og_image, is_published)
+```
+- Each page has a unique `slug` like `/`, `/about`, `/contact`
+- Contains SEO metadata and page-level configuration
+
+#### 2. Components Table - Component Type Registry
+```sql
+components (id, name, display_name, description, schema, template_path, is_active)
+```
+- Defines available component types: `home_component`, `hero`, `text_block`, etc.
+- `schema` = JSON schema defining expected props for each component type
+- `template_path` = which Svelte component file to render
+
+#### 3. Page Components Table - The Data Bridge
+```sql
+page_components (id, page_id, component_id, component_data, display_order, is_active)
+```
+- **THE MAGIC LINK** - connects pages to components with their data
+- `page_id` → which page this component appears on
+- `component_id` → which type of component it is  
+- `component_data` → **JSON blob with all props for that component instance**
+- `display_order` → order of components on the page
+
+### Data Flow Example
+```javascript
+// 1. User visits /home
+// 2. Database query loads page with components
+{
+  id: 1, slug: "/", title: "Homepage",
+  components: [
+    {
+      component_name: "home_component",
+      component_data: {
+        title: "Welcome to CMS",
+        subtitle: "Database-driven content",
+        content: "<p>All from database...</p>"
+      }
+    }
+  ]
+}
+
+// 3. ComponentLoader renders dynamically
+<ComponentLoader 
+  componentName="home_component"
+  componentData={component_data} 
+/>
+
+// 4. HomeComponent receives all props from database
+export let title;    // "Welcome to CMS"
+export let subtitle; // "Database-driven content"
+export let content;  // "<p>All from database...</p>"
+```
+
+### Why This Architecture is Optimal
+
+#### Maximum Flexibility
+- ✅ **Zero hard-coding** - Everything comes from database
+- ✅ **Infinite reusability** - Same component, different data across pages
+- ✅ **Dynamic routing** - Pages created in database become routes automatically
+- ✅ **Visual ordering** - Components reordered via `display_order`
+- ✅ **Type safety** - Component schemas validate props
+
+#### Content Manager Friendly
+- ✅ Non-technical users can create/edit pages
+- ✅ Add/remove/reorder components visually  
+- ✅ Edit content without touching code
+- ✅ A/B testing with different component data
+
+#### Developer Efficiency  
+- ✅ Write component once, use everywhere with different data
+- ✅ SSR for SEO performance and fast loading
+- ✅ Schema-validated props prevent runtime errors
+- ✅ Single source of truth in database
+
+#### Perfect Balance
+This approach hits the sweet spot between:
+- **Flexibility** vs **Complexity** 
+- **Power** vs **Performance**
+- **Dynamic** vs **Maintainable**
+- **User-friendly** vs **Developer-friendly**
+
+### CRITICAL: Super DRY Approach - NEVER REPEAT A SINGLE LINE OF CODE
+
+#### Absolute Zero Code Duplication
+- ✅ **NEVER repeat a single line of code** - Everything must be reusable
+- ✅ **ALL components are reusable** - No single-use components allowed
+- ✅ **Always check for existing components** - Before creating new, search existing
+- ✅ **Extend, don't duplicate** - Modify existing components rather than creating new
+
+#### Super DRY Development Workflow
+```
+1. BEFORE creating ANY component:
+   → Search existing components in database
+   → Check component library for similar functionality
+   → Can existing component be extended with props?
+
+2. IF component exists:
+   → Use existing component with different data
+   → Add new props if needed (backwards compatible)
+   → NEVER create duplicate functionality
+
+3. IF component doesn't exist:
+   → Create maximally reusable component
+   → Design for multiple use cases from day 1
+   → Add to component registry immediately
+```
+
+#### Component Reusability Rules
+- ✅ **Every component accepts props** - No hard-coded values ever
+- ✅ **Components are data-agnostic** - Work with any data structure
+- ✅ **Flexible styling** - Accept CSS classes/colors as props
+- ✅ **Conditional rendering** - Show/hide elements based on props
+- ✅ **Multiple layouts** - Single component, multiple display modes
+
+#### Examples of Super DRY Implementation
+```javascript
+// ❌ BAD - Multiple similar components
+- HeroSection.svelte
+- AboutHero.svelte  
+- ContactHero.svelte
+
+// ✅ GOOD - One reusable component
+- Hero.svelte (accepts title, subtitle, background, layout props)
+
+// ❌ BAD - Hard-coded button
+<button class="bg-blue-500">Submit</button>
+
+// ✅ GOOD - Reusable button component
+<Button variant="primary" text="Submit" onClick={handleSubmit} />
+```
+
+#### Component Extension Strategy
+```javascript
+// Instead of creating new component, extend existing:
+export let variant = 'default';  // default, large, small, hero
+export let layout = 'center';    // center, left, right, split
+export let theme = 'light';      // light, dark, gradient
+export let showCTA = true;       // show/hide call-to-action
+```
+
+#### Database Component Management
+- ✅ **Component registry** - All components tracked in database
+- ✅ **Usage tracking** - Know which components are used where
+- ✅ **Schema evolution** - Update component schemas, not create new
+- ✅ **Deprecation process** - Phase out old components gradually
+
+### MANDATORY Super DRY Principles
+- **NEVER repeat a single line of code** - Zero tolerance for duplication
+- **Everything is reusable** - No single-use components exist
+- **Always check existing first** - Search before create
+- **Extend over create** - Modify existing rather than duplicate
+- **Props over hard-coding** - Every value comes from props/database
+- **One component, infinite uses** - Maximum reusability always
