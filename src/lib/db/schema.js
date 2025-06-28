@@ -118,6 +118,22 @@ function initializeDatabase() {
 
   const defaultComponents = [
     {
+      name: 'home_component',
+      display_name: 'Home Component',
+      description: 'Homepage placeholder component with title and content',
+      schema: JSON.stringify({
+        type: 'object',
+        properties: {
+          title: { type: 'string', title: 'Title', default: 'Home Placeholder' },
+          subtitle: { type: 'string', title: 'Subtitle' },
+          content: { type: 'string', title: 'Content', format: 'textarea' },
+          background_color: { type: 'string', title: 'Background Color', default: 'bg-white' }
+        },
+        required: ['title']
+      }),
+      template_path: 'HomeComponent.svelte'
+    },
+    {
       name: 'hero',
       display_name: 'Hero Section',
       description: 'Hero banner with title, subtitle, and call-to-action',
