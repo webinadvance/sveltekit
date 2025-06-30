@@ -1,24 +1,41 @@
 <script>
   import HomeComponent from './HomeComponent.svelte';
+  import TestComponent from './TestComponent.svelte';
+  import Hero from './Hero.svelte';
+  import ArtGallery from './ArtGallery.svelte';
+  import ArtistBio from './ArtistBio.svelte';
+  import ContactSection from './ContactSection.svelte';
+  import EditableWrapper from './EditableWrapper.svelte';
   // Import other components as they are created
   
   export let componentName = '';
   export let componentData = {};
+  export let componentId = '';
+  export let pageComponentId = null; // Database ID for saving
   
   // Component mapping - maps database component names to actual Svelte components
   const componentMap = {
     'home_component': HomeComponent,
+    'test_component': TestComponent,
+    'hero': Hero,
+    'art_gallery': ArtGallery,
+    'artist_bio': ArtistBio,
+    'contact_section': ContactSection,
     // Add other components here as they are created
-    // 'hero': HeroComponent,
-    // 'text_block': TextBlockComponent,
-    // etc.
   };
   
   $: Component = componentMap[componentName];
 </script>
 
 {#if Component}
-  <svelte:component this={Component} {...componentData} />
+  <EditableWrapper 
+    {componentId}
+    {componentName}
+    {componentData}
+    {pageComponentId}
+  >
+    <svelte:component this={Component} {...componentData} />
+  </EditableWrapper>
 {:else}
   <div class="unknown-component bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
     <strong>Unknown Component:</strong> {componentName}

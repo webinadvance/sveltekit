@@ -10,4 +10,12 @@
   });
 </script>
 
-<slot />
+<div class="app-container">
+  <slot />
+</div>
+
+<style>
+  .app-container {
+    padding-top: 0;
+  }
+</style>

@@ -18,6 +18,7 @@ export const pages = {
         WHERE slug = ? AND is_published = 1
       `).get(slug);
 
+      console.log('Found page:', page);
       if (!page) return null;
 
       const pageComponents = db.prepare(`
@@ -32,6 +33,8 @@ export const pages = {
         ORDER BY pc.display_order ASC
       `).all(page.id);
 
+      console.log(`Found ${pageComponents.length} components for page ${page.id}`);
+
       return {
         ...page,
         components: pageComponents.map(pc => ({
@@ -41,6 +44,7 @@ export const pages = {
       };
     } catch (error) {
       console.error('Error loading page:', error);
+      console.error('Error stack:', error.stack);
       return null;
     }
   },
@@ -172,17 +176,43 @@ export const pageComponents = {
 
   // Update component data
   update(id, data) {
-    const stmt = db.prepare(`
-      UPDATE page_components 
-      SET component_data = ?, display_order = ?, updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
-    `);
-    stmt.run(
-      JSON.stringify(data.component_data),
-      data.display_order || 0,
-      id
-    );
-    return { id, ...data };
+    try {
+      console.log('Updating component:', { id, data });
+      console.log('Database readonly status:', db.readonly);
+      
+      // If only updating component_data, preserve existing display_order
+      if (data.component_data && !('display_order' in data)) {
+        const stmt = db.prepare(`
+          UPDATE page_components 
+          SET component_data = ?, updated_at = CURRENT_TIMESTAMP
+          WHERE id = ?
+        `);
+        const result = stmt.run(
+          JSON.stringify(data.component_data),
+          id
+        );
+        console.log('Update result:', result);
+      } else {
+        // Full update including display_order
+        const stmt = db.prepare(`
+          UPDATE page_components 
+          SET component_data = ?, display_order = ?, updated_at = CURRENT_TIMESTAMP
+          WHERE id = ?
+        `);
+        const result = stmt.run(
+          JSON.stringify(data.component_data),
+          data.display_order || 0,
+          id
+        );
+        console.log('Update result:', result);
+      }
+      return { id, ...data };
+    } catch (error) {
+      console.error('Database update error:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      throw error;
+    }
   },
 
   // Delete page component

@@ -14,11 +14,14 @@ let db;
 try {
   db = new Database(DB_PATH);
   db.pragma("foreign_keys = ON");
+  db.pragma("journal_mode = WAL"); // Enable Write-Ahead Logging
   console.log(`Database connected: ${DB_PATH}`);
+  console.log(`Database is read-only: ${db.readonly}`);
 } catch (error) {
   console.error("Failed to open database:", error);
   db = new Database(":memory:");
   db.pragma("foreign_keys = ON");
+  db.pragma("journal_mode = WAL");
 }
 
 function initializeDatabase() {

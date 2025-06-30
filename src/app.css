@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
-/* Apply Inter font globally */
+/* Reset and apply Inter font globally */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Inter', sans-serif;
+}
+
+/* Ensure no elements can cause horizontal scroll */
+* {
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 /* Accent color classes - easy to change site-wide */
