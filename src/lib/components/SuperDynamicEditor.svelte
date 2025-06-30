@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
+  import { activeTheme } from '$lib/styles/themes.js';
   
   const dispatch = createEventDispatcher();
   
@@ -253,17 +254,30 @@
   }
 </script>
 
-<div class="super-editor">
+<div class="super-editor" style="
+  --primary-color: {activeTheme.primary};
+  --secondary-color: {activeTheme.secondary};
+  --accent-color: {activeTheme.accent};
+  --title-font: {activeTheme.typography.title.fontFamily};
+  --title-weight: {activeTheme.typography.title.fontWeight};
+  --body-font: {activeTheme.typography.body.fontFamily};
+  --neon-glow-small: {activeTheme.neon.glow.small};
+  --neon-glow-medium: {activeTheme.neon.glow.medium};
+  --neon-title-shadow: {activeTheme.neon.title.textShadow};
+  --button-border: {activeTheme.neon.button.border};
+  --button-glow: {activeTheme.neon.button.glow};
+  --button-hover-glow: {activeTheme.neon.button.hoverGlow};
+">
   <div class="editor-header">
     <h3 class="editor-title">
-      ✏️ Editing: {componentName.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+      Editing: {componentName.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
     </h3>
     <div class="editor-actions">
       <button class="btn-cancel" on:click={handleCancel}>
-        ❌ Cancel
+        Cancel
       </button>
       <button class="btn-save" on:click={handleSave}>
-        ✅ Save Changes
+        Save Changes
       </button>
     </div>
   </div>
@@ -353,12 +367,12 @@
                     on:click={() => editData[field] = ''}
                     title="Remove image"
                   >
-                    ❌
+                    ×
                   </button>
                 </div>
               {:else}
                 <div class="image-placeholder">
-                  🖼️ No image selected
+                  No image selected
                 </div>
               {/if}
             </div>
@@ -366,9 +380,9 @@
             <div class="image-controls">
               <label class="btn-upload" class:uploading={uploadingImages[field]}>
                 {#if uploadingImages[field]}
-                  ⏳ Uploading...
+                  Uploading...
                 {:else}
-                  📤 Upload Image
+                  Upload Image
                 {/if}
                 <input
                   type="file"
@@ -384,7 +398,7 @@
                 on:click={() => selectFromMediaLibrary(field)}
                 disabled={uploadingImages[field]}
               >
-                📁 Media Library
+                Media Library
               </button>
               
               <input
@@ -429,7 +443,7 @@
                     on:click={() => removeArrayItem(field, index)}
                     title="Remove item"
                   >
-                    🗑️
+                    Remove
                   </button>
                 </div>
               {/each}
@@ -440,7 +454,7 @@
               class="btn-add"
               on:click={() => addArrayItem(field, config.items)}
             >
-              ➕ Add {config.itemName || 'Item'}
+              Add {config.itemName || 'Item'}
             </button>
           </div>
           
@@ -469,7 +483,7 @@
   
   <div class="editor-footer">
     <p class="editor-info">
-      💾 Changes are saved to the database in real-time
+      Changes are saved to the database in real-time
     </p>
   </div>
 </div>
@@ -477,15 +491,19 @@
 <style>
   .super-editor {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
   }
   
   .editor-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -493,9 +511,9 @@
   
   .editor-title {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
-    color: white;
+    color: #333;
   }
   
   .editor-actions {
@@ -504,92 +522,96 @@
   }
   
   .btn-cancel, .btn-save {
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 8px 16px;
+    border-radius: 4px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
+    transition: all 0.2s ease;
+    border: 1px solid;
+    font-family: inherit;
   }
   
   .btn-cancel {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    backdrop-filter: blur(10px);
+    border-color: #6c757d;
+    color: #6c757d;
+    background: white;
   }
   
   .btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
+    background: #f8f9fa;
+    border-color: #5a6268;
+    color: #5a6268;
   }
   
   .btn-save {
-    background: #10b981;
+    border-color: #007bff;
     color: white;
-    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+    background: #007bff;
   }
   
   .btn-save:hover {
-    background: #059669;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    background: #0056b3;
+    border-color: #0056b3;
   }
   
   .editor-content {
-    padding: 24px;
+    padding: 20px;
     max-height: 500px;
     overflow-y: auto;
+    background: white;
   }
   
   .field-wrapper {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   
   .field-label {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #374151;
-    margin-bottom: 8px;
+    color: #495057;
+    margin-bottom: 6px;
+    font-family: inherit;
   }
   
   .required {
-    color: #ef4444;
+    color: #dc3545;
     margin-left: 2px;
   }
   
   .field-description {
     font-size: 12px;
-    color: #6b7280;
-    margin: 4px 0 8px 0;
+    color: #6c757d;
+    margin: 4px 0 6px 0;
   }
   
   .field-input, .field-textarea, .field-select {
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
     font-size: 14px;
-    transition: all 0.3s ease;
-    background: #f9fafb;
+    transition: all 0.2s ease;
+    background: white;
+    color: #495057;
+    font-family: inherit;
   }
   
   .field-input:focus, .field-textarea:focus, .field-select:focus {
     outline: none;
-    border-color: #667eea;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
   }
   
   .field-input.error, .field-textarea.error, .field-select.error {
-    border-color: #ef4444;
+    border-color: #dc3545;
   }
   
   .field-checkbox {
-    width: 20px;
-    height: 20px;
-    accent-color: #667eea;
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff;
   }
   
   .checkbox-wrapper {
@@ -601,7 +623,8 @@
   
   .checkbox-label {
     font-size: 14px;
-    color: #4b5563;
+    color: #495057;
+    font-family: inherit;
   }
   
   .color-input-wrapper {
@@ -611,10 +634,10 @@
   }
   
   .field-color {
-    width: 60px;
-    height: 40px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
+    width: 50px;
+    height: 32px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
     cursor: pointer;
   }
   
@@ -623,10 +646,10 @@
   }
   
   .array-field {
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 16px;
-    background: #f9fafb;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 12px;
+    background: #f8f9fa;
   }
   
   .array-item {
@@ -643,95 +666,106 @@
   
   .array-input {
     flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 13px;
+    background: white;
+    color: #495057;
   }
   
   .btn-remove {
-    padding: 8px;
-    background: #fee2e2;
-    border: none;
-    border-radius: 6px;
+    padding: 6px 8px;
+    background: white;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s;
+    color: #dc3545;
+    font-size: 12px;
   }
   
   .btn-remove:hover {
-    background: #fecaca;
+    background: #dc3545;
+    color: white;
   }
   
   .btn-add {
     margin-top: 8px;
-    padding: 8px 16px;
-    background: #dbeafe;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 6px 12px;
+    background: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 4px;
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.2s;
+    color: white;
+    font-family: inherit;
   }
   
   .btn-add:hover {
-    background: #bfdbfe;
+    background: #218838;
+    border-color: #218838;
   }
   
   .empty-array {
-    color: #9ca3af;
+    color: #6c757d;
     font-style: italic;
     margin: 8px 0;
+    text-align: center;
+    font-size: 13px;
   }
   
   .field-hint {
     font-size: 12px;
-    color: #6b7280;
+    color: #6c757d;
     margin-top: 4px;
   }
   
   .field-error {
     font-size: 12px;
-    color: #ef4444;
+    color: #dc3545;
     margin-top: 4px;
   }
   
   .editor-footer {
-    background: #f9fafb;
-    padding: 16px 20px;
-    border-top: 1px solid #e5e7eb;
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-top: 1px solid #e9ecef;
   }
   
   .editor-info {
     margin: 0;
-    font-size: 13px;
-    color: #6b7280;
+    font-size: 12px;
+    color: #6c757d;
     text-align: center;
+    font-family: inherit;
   }
   
   /* Scrollbar styling */
   .editor-content::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   
   .editor-content::-webkit-scrollbar-track {
-    background: #f3f4f6;
+    background: #f8f9fa;
   }
   
   .editor-content::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 4px;
+    background: #dee2e6;
+    border-radius: 3px;
   }
   
   .editor-content::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
+    background: #adb5bd;
   }
   
   /* Image field styles */
   .image-field {
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 16px;
-    background: #f9fafb;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 12px;
+    background: #f8f9fa;
   }
   
   .image-preview-wrapper {
@@ -741,9 +775,9 @@
   .image-preview {
     position: relative;
     display: inline-block;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
   }
   
   .preview-img {
@@ -757,34 +791,35 @@
     position: absolute;
     top: 4px;
     right: 4px;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border: none;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(220, 53, 69, 0.8);
     color: white;
-    font-size: 10px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    line-height: 1;
   }
   
   .btn-remove-image:hover {
-    background: rgba(239, 68, 68, 0.9);
-    transform: scale(1.1);
+    background: #dc3545;
   }
   
   .image-placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100px;
-    border: 2px dashed #d1d5db;
-    border-radius: 8px;
-    color: #9ca3af;
-    font-size: 14px;
+    height: 80px;
+    border: 1px dashed #adb5bd;
+    border-radius: 4px;
+    color: #6c757d;
+    font-size: 13px;
     background: white;
   }
   
@@ -798,27 +833,31 @@
   .btn-upload {
     display: inline-flex;
     align-items: center;
-    padding: 10px 16px;
-    background: #667eea;
+    padding: 6px 12px;
+    background: #007bff;
     color: white;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+    font-family: inherit;
   }
   
   .btn-upload:hover:not(.uploading) {
-    background: #5a67d8;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    background: #0056b3;
+    border-color: #0056b3;
   }
   
   .btn-upload.uploading {
-    background: #9ca3af;
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
     cursor: not-allowed;
+    opacity: 0.6;
   }
   
   .file-input {
@@ -828,26 +867,30 @@
   }
   
   .btn-library {
-    padding: 10px 16px;
-    background: #10b981;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 6px 12px;
+    background: white;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    font-family: inherit;
   }
   
   .btn-library:hover:not(:disabled) {
-    background: #059669;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    background: #f8f9fa;
+    border-color: #5a6268;
+    color: #5a6268;
   }
   
   .btn-library:disabled {
-    background: #9ca3af;
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    color: #adb5bd;
     cursor: not-allowed;
+    opacity: 0.6;
   }
   
   .url-input {
