@@ -62,12 +62,13 @@
   }
   
   .edit-mode {
-    outline: 2px dashed transparent;
+    outline: 2px dashed #ff1493;
     outline-offset: 4px;
   }
   
   .edit-mode:hover {
-    outline-color: #3b82f6;
+    outline-color: #ff69b4;
+    outline-width: 3px;
   }
   
   .editing {

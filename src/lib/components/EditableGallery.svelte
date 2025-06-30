@@ -3,8 +3,7 @@
   import { isEditMode } from '$lib/stores/editMode.js';
   
   // Gallery props
-  export let title = 'Gallery';
-  export let subtitle = '';
+  export let title = '';
   export let images = [];
   export let columns = 3;
   
@@ -68,7 +67,6 @@
           id: pageComponentId,
           component_data: {
             title,
-            subtitle,
             images,
             columns
           }
@@ -100,19 +98,22 @@
   }[columns] || 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
 </script>
 
-<section class="gallery-section py-16 px-4" style="
-  --primary-color: {activeTheme.primary};
-  --title-font-family: {activeTheme.typography.title.fontFamily};
-  --subtitle-font-family: {activeTheme.typography.subtitle.fontFamily};
-  --neon-glow-medium: {activeTheme.neon.glow.medium};
-">
+<section class="gallery-section py-4 px-4">
   <div class="max-w-7xl mx-auto">
-    {#if title}
-      <h2 class="gallery-title text-4xl font-bold text-center mb-4 text-white">{title}</h2>
-    {/if}
     
-    {#if subtitle}
-      <p class="gallery-subtitle text-2xl text-center mb-12 text-pink-300">{subtitle}</p>
+    <!-- Editable Title -->
+    {#if $isEditMode}
+      <div class="mb-6">
+        <input 
+          type="text" 
+          bind:value={title}
+          on:blur={saveToDatabase}
+          placeholder="Gallery Title"
+          class="w-full text-2xl font-bold text-center bg-transparent border-b-2 border-pink-500/50 text-white placeholder-pink-300/50 focus:outline-none focus:border-pink-400 py-2"
+        />
+      </div>
+    {:else if title}
+      <h2 class="text-2xl font-bold text-center mb-6 text-white">{title}</h2>
     {/if}
     
     <!-- Upload button - always visible in edit mode -->
@@ -171,12 +172,9 @@
       {/each}
     </div>
     
-    {#if images.length === 0}
-      <div class="text-center py-12 text-gray-400">
-        <p class="text-lg mb-2">No images in gallery yet</p>
-        {#if $isEditMode}
-          <p class="text-sm">Click "Upload Image" above to add your first image</p>
-        {/if}
+    {#if images.length === 0 && $isEditMode}
+      <div class="text-center py-8 text-gray-400">
+        <p class="text-sm">Click "Upload Image" above to add images</p>
       </div>
     {/if}
   </div>
@@ -211,17 +209,6 @@
 </section>
 
 <style>
-  .gallery-title {
-    font-family: var(--title-font-family);
-    text-shadow: var(--neon-glow-medium);
-  }
-  
-  .gallery-subtitle {
-    font-family: var(--subtitle-font-family);
-    font-weight: 400;
-    font-style: italic;
-  }
-  
   @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
