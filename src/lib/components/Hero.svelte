@@ -102,19 +102,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #111;
+    background: 
+      radial-gradient(ellipse at center top, rgba(255, 20, 147, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at left bottom, rgba(255, 105, 180, 0.1) 0%, transparent 40%),
+      radial-gradient(ellipse at right bottom, rgba(255, 20, 147, 0.1) 0%, transparent 40%),
+      linear-gradient(135deg, #000000 0%, #1a0a2e 25%, #16213e 50%, #0f3460 75%, #533a7d 100%);
+    position: relative;
+  }
+  
+  .hero-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 20, 147, 0.03) 2px,
+        rgba(255, 20, 147, 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 105, 180, 0.02) 2px,
+        rgba(255, 105, 180, 0.02) 4px
+      );
+    pointer-events: none;
   }
   
   .upload-hint {
-    color: rgba(147, 51, 234, 0.9);
+    color: rgba(255, 20, 147, 0.8);
     font-size: 16px;
     text-align: center;
     padding: 20px 40px;
-    border: 1px solid rgba(147, 51, 234, 0.3);
+    border: 1px solid rgba(255, 20, 147, 0.3);
     border-radius: 50px;
-    background: rgba(147, 51, 234, 0.05);
+    background: rgba(255, 20, 147, 0.05);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 10;
   }
   
   .hero-overlay {
