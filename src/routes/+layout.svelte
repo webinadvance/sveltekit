@@ -4,6 +4,7 @@
 
   onMount(async () => {
     if (typeof window !== 'undefined') {
+      // Initialize Eruda for debugging
       const eruda = await import('eruda');
       eruda.default.init();
     }

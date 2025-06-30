@@ -293,6 +293,15 @@ export const activeTheme = myTheme;
 - **Maximum Reusability**: Same component can be used multiple times across different pages with different data
 - **Component-Based Architecture**: Pages are just collections of components with their respective data
 
+### Database Configuration
+**UNIFIED DATABASE**: `/var/data/databases/cms.db` 
+
+**CRITICAL**: ALL environments (development and production) use `/var/data/databases/cms.db`
+- ✅ Zero database sync issues
+- ✅ Same data everywhere 
+- ✅ Single source of truth
+- ✅ No dev/prod differences
+
 ### Database Structure
 ```sql
 -- Pages: Define routes and meta data

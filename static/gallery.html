@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Gallery Test</title>
+    <style>
+        body { 
+            background: #000; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+        }
+        .upload-btn {
+            background: rgba(255, 20, 147, 0.2);
+            border: 1px solid rgba(255, 20, 147, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        #fileInput { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Simple Gallery Upload Test</h1>
+    
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+        📸 Upload Images
+    </button>
+    
+    <div class="gallery" id="gallery">
+        <!-- Images will appear here -->
+    </div>
+    
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const gallery = document.getElementById('gallery');
+            
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+                    gallery.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

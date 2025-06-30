@@ -33,20 +33,24 @@
   
   <div class="hero-content">
     <div class="hero-text">
-      <NeonTitle 
-        {title} 
-        size="large" 
-        splitWords={true} 
-        showLaser={true} 
-        animate={true} 
-      />
+      <div>
+        <NeonTitle 
+          {title} 
+          size="large" 
+          splitWords={true} 
+          showLaser={true} 
+          animate={true} 
+        />
+      </div>
       {#if subtitle}
         <p class="hero-subtitle">{subtitle}</p>
       {/if}
       {#if cta_text && cta_link}
-        <a href={cta_link} class="hero-cta">
-          {cta_text}
-        </a>
+        <div>
+          <a href={cta_link} class="hero-cta">
+            {cta_text}
+          </a>
+        </div>
       {/if}
     </div>
   </div>

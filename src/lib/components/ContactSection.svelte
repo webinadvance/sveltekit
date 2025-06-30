@@ -46,14 +46,14 @@
 <section class="contact-section" bind:this={contactElement} class:visible>
   <div class="contact-container">
     <div class="contact-header">
-      <h2 class="contact-title">{title}</h2>
+      <h2 class="contact-title" data-aos="fade-up">{title}</h2>
       {#if subtitle}
-        <p class="contact-subtitle">{subtitle}</p>
+        <p class="contact-subtitle" data-aos="fade-up" data-aos-delay="200">{subtitle}</p>
       {/if}
     </div>
     
     <div class="contact-content">
-      <div class="contact-info">
+      <div class="contact-info" data-aos="fade-right" data-aos-delay="300">
         <div class="info-item">
           <h3>Let's Create Together</h3>
           <p>Ready to bring your vision to life? I'm here to collaborate on extraordinary projects.</p>
@@ -87,7 +87,7 @@
         {/if}
       </div>
       
-      <form class="contact-form" on:submit={handleSubmit}>
+      <form class="contact-form" data-aos="fade-left" data-aos-delay="400" on:submit={handleSubmit}>
         <div class="form-group">
           <input 
             type="text" 

@@ -3,8 +3,8 @@ import { dev } from '$app/environment';
 import fs from 'fs';
 import path from 'path';
 
-// Database file location
-const DB_PATH = process.env.DB_PATH || '/var/data/databases/cinziabrugnola.db';
+// Database file location - ALWAYS use the same database for dev and production
+const DB_PATH = process.env.DB_PATH || '/var/data/databases/cms.db';
 
 // Ensure directory exists
 const dbDir = path.dirname(DB_PATH);
