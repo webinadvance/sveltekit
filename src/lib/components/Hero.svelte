@@ -1,5 +1,6 @@
 <script>
   import { activeTheme } from '$lib/styles/themes.js';
+  import NeonTitle from '$lib/components/NeonTitle.svelte';
   
   // Hero component props
   export let title = "Welcome";
@@ -32,14 +33,13 @@
   
   <div class="hero-content">
     <div class="hero-text">
-      <h1 class="hero-title neon-text">
-        {#each title.split(' ') as word, index}
-          <div class="name-line">
-            {word}
-            <div class="laser-effect"></div>
-          </div>
-        {/each}
-      </h1>
+      <NeonTitle 
+        {title} 
+        size="large" 
+        splitWords={true} 
+        showLaser={true} 
+        animate={true} 
+      />
       {#if subtitle}
         <p class="hero-subtitle">{subtitle}</p>
       {/if}
@@ -64,10 +64,9 @@
   .hero-section {
     position: relative;
     width: 100%;
-    height: 100vh;
-    height: 100dvh; /* Dynamic viewport height for mobile */
-    min-height: 100vh;
-    min-height: 100dvh;
+    height: 80vh; /* Reduced from 100vh to allow scrolling */
+    min-height: 600px; /* Minimum height for smaller screens */
+    max-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,92 +137,7 @@
     transform: translateY(-8vh);
   }
   
-  .hero-title {
-    font-size: clamp(4rem, 12vw, 8rem);
-    font-weight: 900;
-    margin: 0 0 32px 0;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-  
-  .name-line {
-    position: relative;
-    display: block;
-    white-space: nowrap;
-  }
-  
-  .neon-text {
-    color: #ff1493;
-    -webkit-text-stroke: 1px #ffffff;
-    text-stroke: 1px #ffffff;
-    text-shadow: 
-      0 0 10px #ff1493,
-      0 0 20px #ff1493,
-      0 0 2px #000000,
-      1px 1px 2px rgba(0, 0, 0, 0.9);
-    animation: neon-flicker 3s ease-in-out infinite alternate;
-  }
-  
-  @keyframes neon-flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
-      text-shadow: 
-        0 0 10px #ff1493,
-        0 0 20px #ff1493,
-        0 0 2px #000000,
-        1px 1px 2px rgba(0, 0, 0, 0.9);
-    }
-    20%, 24%, 55% {
-      text-shadow: 
-        0 0 5px #ff1493,
-        0 0 15px #ff1493,
-        0 0 2px #000000,
-        1px 1px 2px rgba(0, 0, 0, 0.9);
-    }
-  }
-  
-  .laser-effect {
-    position: absolute;
-    top: 50%;
-    left: -100%;
-    width: 200%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      #ff69b4 45%,
-      #ffffff 50%,
-      #ff69b4 55%,
-      transparent 100%
-    );
-    transform: translateY(-50%);
-    animation: laser-sweep 3s ease-in-out infinite;
-    box-shadow: 
-      0 0 5px #ff69b4,
-      0 0 10px #ff69b4;
-  }
-  
-  @keyframes laser-sweep {
-    0% {
-      left: -100%;
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    80% {
-      opacity: 1;
-    }
-    100% {
-      left: 100%;
-      opacity: 0;
-    }
-  }
+  /* NeonTitle component styles are now centralized in the component itself */
   
   .hero-subtitle {
     font-family: var(--subtitle-font-family, 'Dancing Script', cursive);
@@ -334,9 +248,7 @@
       padding: 0 20px;
     }
     
-    .hero-title {
-      font-size: clamp(3rem, 10vw, 6rem);
-    }
+    /* NeonTitle mobile styles handled in component */
     
     .hero-cta {
       padding: 14px 36px;

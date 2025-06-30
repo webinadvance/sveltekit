@@ -5,6 +5,8 @@
   import ArtGallery from './ArtGallery.svelte';
   import ArtistBio from './ArtistBio.svelte';
   import ContactSection from './ContactSection.svelte';
+  import ContentSection from './ContentSection.svelte';
+  import TextBlock from './TextBlock.svelte';
   import EditableWrapper from './EditableWrapper.svelte';
   // Import other components as they are created
   
@@ -21,6 +23,8 @@
     'art_gallery': ArtGallery,
     'artist_bio': ArtistBio,
     'contact_section': ContactSection,
+    'content_section': ContentSection,
+    'text_block': TextBlock,
     // Add other components here as they are created
   };
   

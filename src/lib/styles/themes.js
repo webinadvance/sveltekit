@@ -8,9 +8,10 @@ export const neonTheme = {
   // Typography system
   typography: {
     title: {
-      fontFamily: 'Inter, system-ui, sans-serif',
-      fontWeight: 900,
-      textTransform: 'uppercase'
+      fontFamily: "'Orbitron', 'Exo 2', system-ui, sans-serif",
+      fontWeight: 800,
+      textTransform: 'uppercase',
+      letterSpacing: '0.08em'
     },
     subtitle: {
       fontFamily: "'Dancing Script', cursive",
@@ -31,6 +32,42 @@ export const neonTheme = {
       medium: '0 0 20px #ff1493',
       large: '0 0 40px #ff1493',
       stroke: '1px #ffffff'
+    },
+    
+    // Classic readable neon title effect (like Canva)
+    title: {
+      color: '#ffffff',
+      textShadow: `
+        0 0 5px #ff1493,
+        0 0 10px #ff1493,
+        0 0 15px #ff1493,
+        0 0 20px #ff1493,
+        0 0 35px #ff69b4,
+        -1px -1px 0 #ff1493,
+        1px -1px 0 #ff1493,
+        -1px 1px 0 #ff1493,
+        1px 1px 0 #ff1493
+      `,
+      textStroke: '1px #ff1493',
+      filter: 'drop-shadow(0 0 8px #ff1493)',
+      // Animation states
+      animationShadow: `
+        0 0 8px #ff1493,
+        0 0 15px #ff1493,
+        0 0 25px #ff1493,
+        0 0 35px #ff69b4,
+        -1px -1px 0 #ff1493,
+        1px -1px 0 #ff1493,
+        -1px 1px 0 #ff1493,
+        1px 1px 0 #ff1493
+      `,
+      // Size configurations  
+      sizes: {
+        small: 'clamp(2rem, 6vw, 3rem)',
+        medium: 'clamp(3rem, 8vw, 4.5rem)', 
+        large: 'clamp(4rem, 12vw, 8rem)',
+        xl: 'clamp(5rem, 15vw, 10rem)'
+      }
     },
     
     // Button styles
